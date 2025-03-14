@@ -1,0 +1,21 @@
+# Ignore Unity-specific files
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+
+# Ignore .vs and Rider settings
+.vs/
+.idea/
+*.csproj
+*.sln
+*.userprefs
+*.pidb
+
+# Ignore system files
+.DS_Store
+Thumbs.db
