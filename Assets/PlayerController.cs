@@ -1,82 +1,86 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class DoubleJumpWithTrigger : MonoBehaviour
 {
-    [Header("ÒÆ¶¯²ÎÊı")]
-    public float moveSpeed = 3f;    // Ë®Æ½ÒÆ¶¯ËÙ¶È
-    public float gravity = 9.81f;   // ÖØÁ¦
-    public float jumpForce = 5f;    // ÌøÔ¾³õÊ¼ËÙ¶È
+    [Header("ç§»åŠ¨å‚æ•°")]
+    public float moveSpeed = 3f;       // æ°´å¹³ç§»åŠ¨é€Ÿåº¦
+    public float gravity = 9.81f;      // é‡åŠ›
+    public float jumpForce = 5f;       // è·³è·ƒåˆå§‹é€Ÿåº¦
 
-    [Header("ÌøÔ¾Ïà¹Ø")]
-    public int maxJumpCount = 2;    // ×î´óÌøÔ¾´ÎÊı£¨ÊµÏÖ¶ş¶ÎÌø£©
+    [Header("è·³è·ƒç›¸å…³")]
+    public int maxJumpCount = 2;       // æœ€å¤§è·³è·ƒæ¬¡æ•°ï¼ˆå®ç°äºŒæ®µè·³ï¼‰
 
     private CharacterController _charController;
     private Animator _animator;
 
-    private float _verticalVelocity;  // ÊúÖ±·½ÏòËÙ¶È£¨ÊÜÖØÁ¦Ó°Ïì£©
-    private int _currentJumpCount;    // ÒÑ¾­ÌøÁË¼¸´Î
+    private float _verticalVelocity;    // ç«–ç›´æ–¹å‘é€Ÿåº¦ï¼ˆå—é‡åŠ›å½±å“ï¼‰
+    private int _currentJumpCount;      // å·²ç»è·³äº†å‡ æ¬¡
 
     void Start()
     {
         _charController = GetComponent<CharacterController>();
         _animator = GetComponent<Animator>();
 
-        // ¸Õ¿ªÊ¼£¬ÌøÔ¾´ÎÊıÇåÁã
+        // åˆšå¼€å§‹ï¼Œè·³è·ƒæ¬¡æ•°æ¸…é›¶
         _currentJumpCount = 0;
     }
 
     void Update()
     {
-        // 1. »ñÈ¡Íæ¼ÒÊäÈë (W/S »ò ÉÏ/ÏÂ¼ıÍ·) - Ç°ºóÒÆ¶¯
+        // ========== è·å–ç©å®¶è¾“å…¥ ==========
+        // 1. å‰åç§»åŠ¨ (W/S æˆ– â†‘/â†“)
         float verticalInput = Input.GetAxis("Vertical");
+        // 2. å·¦å³ç§»åŠ¨ (A/D æˆ– â†/â†’)
+        float horizontalInput = Input.GetAxis("Horizontal");
 
-        // 2. ¼ÆËãË®Æ½·½ÏòÒÆ¶¯£¨Ö»¿¼ÂÇZÖáÇ°ºó£©
-        Vector3 move = transform.forward * verticalInput * moveSpeed;
+        // ========== è®¡ç®—æ°´å¹³æ–¹å‘ç§»åŠ¨ ==========
+        // å‰åï¼štransform.forward * verticalInput
+        // å·¦å³ï¼štransform.right * horizontalInput
+        Vector3 move = (transform.forward * verticalInput + transform.right * horizontalInput) * moveSpeed;
 
-        // 3. ¼ì²âÊÇ·ñÔÚµØÃæ
-        //    Ö»ÒªÅöµ½µØÃæ£¬¾ÍÖØÖÃÌøÔ¾´ÎÊı
+        // ========== æ£€æµ‹æ˜¯å¦åœ¨åœ°é¢ ==========
         if (_charController.isGrounded)
         {
+            // ä¸€æ—¦è½åœ°ï¼Œå°±é‡ç½®è·³è·ƒæ¬¡æ•°
             _currentJumpCount = 0;
-            // ÈÃÊúÖ±ËÙ¶È±£³ÖÒ»¸öĞ¡¸ºÖµ»òÖ±½ÓÖÃ 0
+            // è®©ç«–ç›´é€Ÿåº¦ä¿æŒä¸€ä¸ªå°è´Ÿå€¼æˆ–ç›´æ¥ç½® 0
             _verticalVelocity = -0.1f;
         }
 
-        // 4. °´ÏÂ¿Õ¸ñ´¥·¢ÌøÔ¾£¨Ö§³Ö¶ş¶ÎÌø£©
+        // ========== æŒ‰ä¸‹ç©ºæ ¼è§¦å‘è·³è·ƒï¼ˆæ”¯æŒäºŒæ®µè·³ï¼‰ ==========
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Èç¹ûµ±Ç°ÌøÔ¾´ÎÊı < ×î´óÔÊĞí´ÎÊı
+            // å¦‚æœå½“å‰è·³è·ƒæ¬¡æ•° < æœ€å¤§å…è®¸æ¬¡æ•°
             if (_currentJumpCount < maxJumpCount)
             {
                 _verticalVelocity = jumpForce;
                 _currentJumpCount++;
 
-                // ÕâÀïÓÃTriggerÖ»´¥·¢Ò»´Î¹ı¶É
+                // ä½¿ç”¨ Trigger åªè§¦å‘ä¸€æ¬¡è¿‡æ¸¡
                 _animator.SetTrigger("JumpTrigger");
             }
         }
 
-        // 5. ½ÇÉ«ÔÚ¿ÕÖĞ¾Í¼ÌĞøÊÜÖØÁ¦Ó°Ïì
+        // ========== ç©ºä¸­é‡åŠ›å¤„ç† ==========
         if (!_charController.isGrounded)
         {
             _verticalVelocity -= gravity * Time.deltaTime;
         }
 
-        // 6. ½«ÊúÖ±ËÙ¶ÈºÏ²¢½øÒÆ¶¯ÏòÁ¿
+        // æŠŠç«–ç›´é€Ÿåº¦åˆå¹¶è¿›ç§»åŠ¨å‘é‡
         move.y = _verticalVelocity;
 
-        // ÓÃ CharacterController µÄ Move() À´ÒÆ¶¯½ÇÉ«
+        // ç”¨ CharacterController çš„ Move() æ¥ç§»åŠ¨è§’è‰²
         _charController.Move(move * Time.deltaTime);
 
-        // ============ ¸üĞÂ Animator ²ÎÊı ============
-
-        // Èç¹ûĞèÒªÔÚ Animator ÀïÇø·Ö¡°ÔÚ¿ÕÖĞ¡±»¹ÊÇ¡°ÔÚµØÃæ¡±£¬
-        // ¿ÉÒÔÌí¼Ó¸ö InAir (bool) ²ÎÊı£¬ÕâÀïÑİÊ¾£º
+        // ============ æ›´æ–° Animator å‚æ•° ============
+        // åˆ¤æ–­è§’è‰²æ˜¯å¦åœ¨ç©ºä¸­
         bool inAir = !_charController.isGrounded;
         _animator.SetBool("InAir", inAir);
 
-        // Ò²¿É°ÑÇ°ºóÒÆ¶¯Á¿´«¸ø Animator£¬ÓÃÀ´Çø·Ö Idle / Walk ¶¯»­
+        // å°†è¾“å…¥å€¼ä¼ ç»™ Animatorï¼Œç”¨æ¥åœ¨åŠ¨ç”»é‡ŒåŒºåˆ†å‰å/å·¦å³ç§»åŠ¨
         _animator.SetFloat("Vertical", verticalInput);
+        _animator.SetFloat("Horizontal", horizontalInput);
     }
 }
