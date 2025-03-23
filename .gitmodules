@@ -1,0 +1,3 @@
+[submodule "Assets/glTFast"]
+	path = Assets/glTFast
+	url = https://github.com/atteneder/glTFast.git
