@@ -1,0 +1,40 @@
+fileFormatVersion: 2
+guid: fc785871942694544af5a7788321766a
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 715df9372183c47e389bb6e19fbc3b52, type: 3}
+  editorImportSettings:
+    generateSecondaryUVSet: 0
+  importSettings:
+    nodeNameMethod: 1
+    animationMethod: 2
+    generateMipMaps: 1
+    texturesReadable: 0
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  instantiationSettings:
+    mask: -1
+    layer: 0
+    skinUpdateWhenOffscreen: 1
+    lightIntensityFactor: 1
+    sceneObjectCreation: 2
+  assetDependencies:
+  - type: 0
+    originalUri: Assets\stone_pathway_4k.gltf\stone_pathway.bin
+    assetPath: Assets\stone_pathway_4k.gltf\stone_pathway.bin
+  - type: 1
+    originalUri: Assets\stone_pathway_4k.gltf\textures\stone_pathway_nor_gl_4k.jpg
+    assetPath: Assets\stone_pathway_4k.gltf\textures\stone_pathway_nor_gl_4k.jpg
+  - type: 1
+    originalUri: Assets\stone_pathway_4k.gltf\textures\stone_pathway_diff_4k.jpg
+    assetPath: Assets\stone_pathway_4k.gltf\textures\stone_pathway_diff_4k.jpg
+  - type: 1
+    originalUri: Assets\stone_pathway_4k.gltf\textures\stone_pathway_arm_4k.jpg
+    assetPath: Assets\stone_pathway_4k.gltf\textures\stone_pathway_arm_4k.jpg
+  reportItems: []
