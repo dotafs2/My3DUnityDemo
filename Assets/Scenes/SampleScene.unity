@@ -153,11 +153,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400240, guid: d0477096f2a29bc4ebc710f7868f0307, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.176
+      value: 0.017
       objectReference: {fileID: 0}
     - target: {fileID: 400240, guid: d0477096f2a29bc4ebc710f7868f0307, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.48590162
+      value: 1.535
       objectReference: {fileID: 0}
     - target: {fileID: 400240, guid: d0477096f2a29bc4ebc710f7868f0307, type: 3}
       propertyPath: m_LocalRotation.w
@@ -602,7 +602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400240, guid: d0477096f2a29bc4ebc710f7868f0307, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.22
+      value: 10.0754
       objectReference: {fileID: 0}
     - target: {fileID: 400240, guid: d0477096f2a29bc4ebc710f7868f0307, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1185,6 +1185,7 @@ GameObject:
   - component: {fileID: 1447281302}
   - component: {fileID: 1447281301}
   - component: {fileID: 1447281300}
+  - component: {fileID: 1447281304}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -1237,7 +1238,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 654a6132c8c004d44b695e32bcf4a891, type: 2}
+  - {fileID: 2100000, guid: db6e4f627bff2fb42977b862dff5376d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1275,13 +1276,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1447281299}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 1.6884273, y: 5.87, z: 10.22}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 15}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1447281304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447281299}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd323591009f2d40a69c4bafddd7bb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1508236627
 GameObject:
   m_ObjectHideFlags: 0
