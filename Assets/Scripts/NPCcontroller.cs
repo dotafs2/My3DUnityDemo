@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class NPCMovement : MonoBehaviour
 {
@@ -12,21 +13,29 @@ public class NPCMovement : MonoBehaviour
     {
         if (!hasInteracted)
         {
-            // 沿Z轴向前走
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
-        // 与玩家的距离检测
         float distance = Vector3.Distance(transform.position, player.position);
         if (distance < interactionDistance && Input.GetKeyDown(KeyCode.E))
         {
             Interact();
+   
         }
     }
 
     void Interact()
     {
         hasInteracted = true;
-        animator.SetTrigger("Interact");  // Animator中需设置同名Trigger
+        transform.rotation = Quaternion.Euler(0, transform.eulerAngles.x + 90f, 0);
+        animator.SetTrigger("Interact");
+        StartCoroutine(WaitAndDoSomething());
     }
+
+    IEnumerator WaitAndDoSomething()
+    {
+        yield return new WaitForSeconds(0.7f); 
+        GetComponent<Collider>().enabled = false; 
+    }
+
 }

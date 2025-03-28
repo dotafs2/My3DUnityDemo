@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c445ff66e65488c42ba2b884884264a2, type: 3}
+  m_Name: Conver_Data
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - speaker: Blue
+    content: The forest is so beautiful today!
+  - speaker: Red
+    content: You always find something to smile about...
+  - speaker: Blue
+    content: Is something bothering you?
+  - speaker: Red
+    content: Everyone likes you. They always praise you...
+  - speaker: Blue
+    content: "That\u2019s not true. I admire you too!"
+  - speaker: Red
+    content: "Stop pretending... you don\u2019t understand how I feel."
+  - speaker: Blue
+    content: Red...?
+  - speaker: Red
+    content: Bye...
