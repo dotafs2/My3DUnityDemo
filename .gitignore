@@ -19,3 +19,5 @@ MemoryCaptures/
 # Ignore system files
 .DS_Store
 Thumbs.db
+
+Assets/TerrainTexturesPackFree/
