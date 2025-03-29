@@ -8,7 +8,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (!triggered && Input.GetKeyDown(KeyCode.R))
         {
-            FindObjectOfType<DialogueManager>().StartDialogue();
+            FindFirstObjectByType<DialogueManager>().StartDialogue();
             triggered = true;
         }
     }
