@@ -13,13 +13,20 @@ public class VolumetricCloudsRenderFeature : ScriptableRendererFeature
 
     public override void Create()
     {
+        if (pass == null)
+            pass = new VolumetricCloudsRenderPass(setting);
 
+        pass.renderPassEvent = setting.renderPassEvent; //  设置插入时机
     }
+
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        if (renderingData.cameraData.camera.name != "Main Camera")
+        if (renderingData.cameraData.camera.name != "MainCamera")
+        {
+            Debug.Log("dotafs");
             return;
+        }
 
         if (pass == null)
             pass = new VolumetricCloudsRenderPass(setting);

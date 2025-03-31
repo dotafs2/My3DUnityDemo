@@ -30,7 +30,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BlueNoise:
         m_Texture: {fileID: 2800000, guid: 65ba0b10e860ad040b10aedaf7068a33, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 16, y: 16}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
@@ -73,19 +73,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise2Da:
-        m_Texture: {fileID: 2800000, guid: 3aa69cc028298ec4ebb726155acc1098, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3331f121dd384ef4caff262ff54c1c54, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise2Db:
-        m_Texture: {fileID: 2800000, guid: 8596dfa346ffb9041bb0e6c2184e7ea8, type: 3}
+        m_Texture: {fileID: 2800000, guid: a72020fb96687ea49aa0efdbca9ed579, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise3Da:
-        m_Texture: {fileID: 11700000, guid: a480e1c4ac5df5c47a10c61e29d56128, type: 2}
+        m_Texture: {fileID: 11700000, guid: 9732769700e031a4f9fa139f3363e3e9, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise3Db:
-        m_Texture: {fileID: 11700000, guid: fddabcbe812e9104a84df76fad0b99ab, type: 2}
+        m_Texture: {fileID: 11700000, guid: 55ca6377bd874334ea7504b2cf888046, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -119,16 +119,16 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _BlueNoiseScale: 0.85
+    - _BlueNoiseScale: 1.24
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _CloudEstimatePosLerp: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DensityIteration: 8
-    - _DensityScale: 1
-    - _DensityStepLength: 0.25
+    - _DensityIteration: 256
+    - _DensityScale: 0.5
+    - _DensityStepLength: 0.837
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -139,9 +139,9 @@ Material:
     - _GlossyReflections: 0
     - _LightIteration: 8
     - _LightScale: 1
-    - _LightStepLength: 0.25
+    - _LightStepLength: 0.5
     - _Metallic: 0
-    - _NoiseCullThreshold: 0.2
+    - _NoiseCullThreshold: 0.4
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
@@ -156,18 +156,18 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BoundMax: {r: 0, g: 1, b: 0, a: 0}
-    - _BoundMin: {r: 0, g: 0, b: 0, a: 0}
+    - _BoundMax: {r: 100, g: 10, b: 75, a: 0}
+    - _BoundMin: {r: -100, g: -10, b: -75, a: 0}
     - _CameraPos: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Noise2DaSpeed: {r: 1, g: 1, b: 0, a: 0}
-    - _Noise2DaTile: {r: 3, g: 2, b: 0, a: 0.5}
+    - _Noise2DaSpeed: {r: 0, g: 1, b: 0, a: 0}
+    - _Noise2DaTile: {r: 1, g: 0.7, b: 1, a: 0.015}
     - _Noise2DbSpeed: {r: 1, g: 1, b: 0, a: 0}
-    - _Noise2DbTile: {r: 3, g: 2, b: 0, a: 0.5}
+    - _Noise2DbTile: {r: 1, g: 1, b: 1, a: 0.005}
     - _Noise3DaSpeed: {r: 0, g: 0, b: 0, a: 0}
-    - _Noise3DaTile: {r: 1, g: 1, b: 1, a: 1}
-    - _Noise3DbTile: {r: 1, g: 1, b: 1, a: 1}
+    - _Noise3DaTile: {r: 1, g: 1, b: 1, a: 0.05}
+    - _Noise3DbTile: {r: 1, g: 1, b: 1, a: 0.15}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Time: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
