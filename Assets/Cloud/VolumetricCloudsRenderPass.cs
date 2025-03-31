@@ -5,10 +5,11 @@ using GLTFast.Schema;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.Rendering.Universal;
 using static Unity.VisualScripting.Member;
 
-
+// ≈‰÷√Ω·ππ
 [Serializable]
 public class VolumetricCloudsRenderPassSetting
 {
@@ -24,8 +25,11 @@ public class VolumetricCloudsRenderPassSetting
 
 public class VolumetricCloudsRenderPass : ScriptableRenderPass
 {
+    // The world-space position of each ray's key point during raymarching, and cloud density.
     public static RenderTexture currentCameraTarget0;
+    // The vector of each ray's key point during raymarching, and light intensity.
     public static RenderTexture currentCameraTarget1;
+
     public static RenderTexture currentCloudColor;
     public static RenderTexture taaBlendCloudColor;
     public static RenderTexture volumeLightColor;
@@ -43,9 +47,9 @@ public class VolumetricCloudsRenderPass : ScriptableRenderPass
     }
 
 
+
     public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
     {
-        //......
         CommandBuffer cmd = CommandBufferPool.Get("VolumetricClouds");
 
         RenderCloud(cmd, renderingData);

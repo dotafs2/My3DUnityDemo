@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Cloud
+  m_Name: M_CloudRendering
   m_Shader: {fileID: 4800000, guid: 92086c3c5e03e6b40b11d8ae08780c7a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
