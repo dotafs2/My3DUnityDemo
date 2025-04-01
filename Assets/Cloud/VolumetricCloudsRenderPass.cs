@@ -141,7 +141,7 @@ public class VolumetricCloudsRenderPass : ScriptableRenderPass
         {
             return;
         }
-
+        // 1) 设置渲染目标为 MRT (currentCameraTarget0, currentCameraTarget1)
         RenderTargetIdentifier[] renderTargetIdentifiers = new RenderTargetIdentifier[2];
         renderTargetIdentifiers[0] = currentCameraTarget0;
         renderTargetIdentifiers[1] = currentCameraTarget1;
