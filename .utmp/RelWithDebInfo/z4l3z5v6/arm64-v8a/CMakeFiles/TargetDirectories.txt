@@ -1,0 +1,5 @@
+D:/My3DUnityDemo/.utmp/RelWithDebInfo/z4l3z5v6/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/My3DUnityDemo/.utmp/RelWithDebInfo/z4l3z5v6/arm64-v8a/CMakeFiles/rebuild_cache.dir
+D:/My3DUnityDemo/.utmp/RelWithDebInfo/z4l3z5v6/arm64-v8a/GameActivity/CMakeFiles/game.dir
+D:/My3DUnityDemo/.utmp/RelWithDebInfo/z4l3z5v6/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+D:/My3DUnityDemo/.utmp/RelWithDebInfo/z4l3z5v6/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir

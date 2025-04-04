@@ -119,7 +119,7 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _BlueNoiseScale: 1.24
+    - _BlueNoiseScale: 1.54
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -128,7 +128,7 @@ Material:
     - _Cutoff: 0.5
     - _DensityIteration: 256
     - _DensityScale: 0.5
-    - _DensityStepLength: 0.837
+    - _DensityStepLength: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -138,7 +138,7 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _LightIteration: 8
-    - _LightScale: 1
+    - _LightScale: 0.7
     - _LightStepLength: 0.5
     - _Metallic: 0
     - _NoiseCullThreshold: 0.4
