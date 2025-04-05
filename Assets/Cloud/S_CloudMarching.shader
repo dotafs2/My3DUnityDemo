@@ -62,7 +62,8 @@ Shader "Cloud/CloudMarching"
             // 并且关闭深度写入(ZWrite Off)，让云半透明叠加。
             Tags { "Queue"="Transparent" "RenderPipeline"="UniversalPipeline" "LightMode"="UniversalForward" }
             ZWrite Off
-
+            
+           //  Cull Off
             HLSLPROGRAM
             // 指定顶点着色器 vs: vert, 片元着色器 ps: frag
             #pragma vertex vert
@@ -160,6 +161,7 @@ Shader "Cloud/CloudMarching"
                     return true;
                 return false;
             }
+
 
             // 采样噪声密度(核心函数)，叠加多种纹理噪声并做阈值处理
             float SampleNoiseDensity(float3 worldPos) {
@@ -261,12 +263,8 @@ Shader "Cloud/CloudMarching"
                 // 使用 RayBoxDistance 计算射线与包围盒的交点
                 // rayDir * 1000 => 让射线足够长
                 float hit = RayBoxDistance(_BoundMin, _BoundMax, rayStart, rayDir * 1000, inPos, outPos);
-                                                                                                                          
-                // 如果 hit == 0 说明射线未与盒子相交(或者不合法)，直接返回空
-                if (hit == 0) {
-                    // 直接返回全0，让后续合成阶段不会加上云
-                  //  return (FragmentOutput)0;
-                }
+                                                                   
+
 
                 //----------- 7.5 准备云体/光照累积变量 -----------
                 float cloudDensity = 0;               // 云密度累计
@@ -277,6 +275,8 @@ Shader "Cloud/CloudMarching"
 
                 // 算出射线经过盒子的最大距离
                 float maxDensityLength = distance(inPos, outPos);
+
+
 
                 //----------- 7.6 主Raymarch循环(采样云密度) -----------
                 for(int iii = 0; iii < _DensityIteration; iii++) {
@@ -343,7 +343,6 @@ Shader "Cloud/CloudMarching"
                     if(cloudDensity >= 1)
                         break;
                 }
-
                 //----------- 7.8 云位置估算(简单的起点终点插值) -----------
                 // 在渲染或其它需要时，可以把云的代表位置估算出来
                 float3 cloudEstimatePos = lerp(cloudStartPos, cloudEndPos, _CloudEstimatePosLerp);
@@ -353,9 +352,10 @@ Shader "Cloud/CloudMarching"
 
                 //----------- 7.9 将结果写进 FragmentOutput (MRT) -----------
                 FragmentOutput output = (FragmentOutput)0;
-
+                
+                // For debugging: Make clouds red when camera is inside the bounding box
                 // color0: (xyz=云的世界坐标, w=云密度)
-                output.color0 = float4(cloudEstimatePos, cloudDensity);
+                 output.color0 = float4(cloudEstimatePos, cloudDensity);
 
                 // color1: (xyz=云的运动向量, w=光强度)
                 output.color1 = float4(cloudEstimateMotionVector, lightIntensity);

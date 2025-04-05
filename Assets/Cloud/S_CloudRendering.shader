@@ -136,7 +136,6 @@ Shader "Cloud/CloudRendering"
 
                 // ★ 7) 最终 alpha = 云的密度(决定了最后屏幕合成的透明度)
                 color.a = cloudDensity;
-
                 return color;
             }
             ENDHLSL

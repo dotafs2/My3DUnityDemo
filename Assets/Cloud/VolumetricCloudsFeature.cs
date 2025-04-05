@@ -24,7 +24,7 @@ public class VolumetricCloudsRenderFeature : ScriptableRendererFeature
     {
         if (renderingData.cameraData.camera.name != "MainCamera")
         {
-            Debug.Log("dotafs");
+          //  Debug.Log("dotafs");
             return;
         }
 
