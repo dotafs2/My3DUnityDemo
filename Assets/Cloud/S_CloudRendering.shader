@@ -24,6 +24,7 @@ Shader "Cloud/CloudRendering"
             }
 
             ZWrite Off       // 在本 Pass 里禁止写入深度缓冲
+           // ZTest LEqual
 
             HLSLPROGRAM
             #pragma vertex vert

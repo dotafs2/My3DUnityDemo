@@ -61,8 +61,10 @@ Shader "Cloud/CloudMarching"
             // 这里指定该 Pass 属于透明队列、URP Forward 渲染，
             // 并且关闭深度写入(ZWrite Off)，让云半透明叠加。
             Tags { "Queue"="Transparent" "RenderPipeline"="UniversalPipeline" "LightMode"="UniversalForward" }
-            ZWrite Off
-            
+           // ZWrite Off
+           ZWrite Off         // 不写入深度
+
+
            //  Cull Off
             HLSLPROGRAM
             // 指定顶点着色器 vs: vert, 片元着色器 ps: frag
