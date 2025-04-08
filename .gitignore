@@ -7,17 +7,37 @@
 [Ll]ogs/
 UserSettings/
 MemoryCaptures/
+Assets/StreamingAssets/aa.meta
+Assets/StreamingAssets/aa/
 
-# Ignore .vs and Rider settings
-.vs/
-.idea/
+# Ignore Auto-generated files
 *.csproj
+*.unityproj
 *.sln
+*.suo
+*.tmp
+*.user
 *.userprefs
 *.pidb
+*.booproj
+*.svd
 
-# Ignore system files
+# Ignore crash logs
+sysinfo.txt
+
+# Ignore Rider and VS settings
+.vs/
+.idea/
+
+# Ignore OS-specific files
 .DS_Store
 Thumbs.db
+desktop.ini
 
+# Ignore temporary upload files (like from Google Drive or other tools)
+*.tmp.driveupload*
+
+# Ignore specific third-party assets or folders
 Assets/TerrainTexturesPackFree/
+Assets/Asian Far East Environment/
+Assets/Visual Design Cafe/
