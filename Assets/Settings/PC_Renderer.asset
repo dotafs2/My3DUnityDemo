@@ -65,16 +65,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a0767d7e136e54a81dfa38774291aa, type: 3}
   m_Name: udsVolumetricCloudsRenderFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   setting:
-    renderPassEvent: 250
-    cloudDownSample: 2
+    renderPassEvent: 210
+    cloudDownSample: 1
     cloudRenderingMaterial: {fileID: 2100000, guid: 9a664a4fcd25cb84fb58a374d7e443e6, type: 2}
     bilateralBlurMaterial: {fileID: 2100000, guid: 59e2da7c1b75a154dae545676e73c415, type: 2}
     taaBlendMaterial: {fileID: 2100000, guid: 67b8f219d6be5af4fa64b7ddd16f989d, type: 2}
     finalBlendMaterial: {fileID: 2100000, guid: bf9a57c9bef142b499b17e8a087f6b9b, type: 2}
     bilateralBlurIteration: 4
-    bilateralBlurDownSample: 1
+    bilateralBlurDownSample: 2
 --- !u!114 &7833122117494664109
 MonoBehaviour:
   m_ObjectHideFlags: 0
