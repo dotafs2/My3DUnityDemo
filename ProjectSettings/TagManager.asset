@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 3
   tags:
   - cloud
+  - CinemachineTarget
+  - Weapon
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Weapon
   - Water
   - UI
   - cloud
@@ -36,7 +38,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - XR Simulation
   - 
   m_SortingLayers:
   - name: Default
