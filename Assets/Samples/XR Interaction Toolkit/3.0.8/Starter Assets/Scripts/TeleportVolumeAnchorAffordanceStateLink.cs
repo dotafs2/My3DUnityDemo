@@ -1,6 +1,4 @@
-using System;
 using UnityEngine.XR.Interaction.Toolkit.AffordanceSystem.State;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation;
 
 namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
@@ -11,7 +9,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
     /// of the state provider's originally bound interactable.
     /// </summary>
     [RequireComponent(typeof(XRInteractableAffordanceStateProvider))]
-    [Obsolete("The Affordance System namespace and all associated classes have been deprecated. The existing affordance system will be moved, replaced and updated with a new interaction feedback system in a future version of XRI.")]
     public class TeleportVolumeAnchorAffordanceStateLink : MonoBehaviour
     {
         [SerializeField]
@@ -29,7 +26,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         }
 
         XRInteractableAffordanceStateProvider m_AffordanceStateProvider;
-        IXRInteractable m_Interactable;
+        UnityEngine.XR.Interaction.Toolkit.Interactables.IXRInteractable m_Interactable;
 
         /// <summary>
         /// See <see cref="MonoBehaviour"/>.
@@ -52,13 +49,13 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             }
 
             var interactableSource = m_AffordanceStateProvider.interactableSource;
-            m_Interactable = interactableSource != null && interactableSource is IXRInteractable interactable
+            m_Interactable = interactableSource != null && interactableSource is UnityEngine.XR.Interaction.Toolkit.Interactables.IXRInteractable interactable
                     ? interactable
-                    : m_AffordanceStateProvider.GetComponentInParent<IXRInteractable>();
+                    : m_AffordanceStateProvider.GetComponentInParent<UnityEngine.XR.Interaction.Toolkit.Interactables.IXRInteractable>();
 
             if (m_Interactable == null)
             {
-                Debug.LogError($"Interactable source must be an {nameof(IXRInteractable)}.", this);
+                Debug.LogError($"Interactable source must be an {nameof(UnityEngine.XR.Interaction.Toolkit.Interactables.IXRInteractable)}.", this);
                 enabled = false;
                 return;
             }
