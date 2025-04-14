@@ -10,13 +10,7 @@ public class CheckIsGround : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.3f))
         {
-            print(hit.collider.gameObject.name);
-
-            if (hit.collider.gameObject.name == "Plane001")
-            {
-                return true;
-            }
-            return false;
+            return true;
         }
         return false;
 
