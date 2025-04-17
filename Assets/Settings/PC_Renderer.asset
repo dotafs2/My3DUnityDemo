@@ -65,9 +65,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0a0767d7e136e54a81dfa38774291aa, type: 3}
   m_Name: udsVolumetricCloudsRenderFeature
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   setting:
-    renderPassEvent: 600
+    renderPassEvent: 250
     cloudDownSample: 1
     cloudRenderingMaterial: {fileID: 2100000, guid: 9a664a4fcd25cb84fb58a374d7e443e6, type: 2}
     bilateralBlurMaterial: {fileID: 2100000, guid: 59e2da7c1b75a154dae545676e73c415, type: 2}

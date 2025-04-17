@@ -31,7 +31,7 @@
         [Space(20)]
         _Frequency("波动频率", Range(0,100)) = 10
         _Amplitude("波动幅度", Range(0,1)) = 0.1
-        _Speed("波动速度", Range(0,10)) = 1
+        _Time_scaled_value("Time Scaled Value", Range(0,10)) = 1
 
         [Space(40)]
         _AlphaWidth("边缘透明宽度",Range(-1,1)) = 0
@@ -93,22 +93,33 @@
 
             uniform half _Frequency;
             uniform half _Amplitude;
-            uniform half _Speed;
+            uniform half _Time_scaled_value;
 
             uniform half _AlphaWidth;
 
+
+            /* ------------------- vertex shader -------------------*/
             v2f vert (appdata_full v)
             {
+                // output vector float2
                 v2f o;
-                float time = _Time.y * _Speed;
-                float waveValueA = sin(time + v.vertex.x *_Frequency)* _Amplitude;
-                v.vertex.xyz = float3(v.vertex.x, v.vertex.y + waveValueA, v.vertex.z);
-
+                // time = (game start time * 2) * time scaler
+                float time = _Time.y * _Time_scaled_value;
+                v.vertex.y += sin(time + v.vertex.x *_Frequency) * _Amplitude;
+                
+                
+                // Because v.vertex is local space of the target model, So we need to convert it manualy,
+                // local space -> world space -> view space -> clip space
                 o.vertex = UnityObjectToClipPos(v.vertex);
+                // TRANSFORM_TEX = uv * _Foam_ST.xy + _Foam_ST.zw
+                // _Foam_ST is Tiling XY and Offset XY
                 o.uv_Tex.xy= TRANSFORM_TEX(v.texcoord,_Foam);
                 o.uv_Tex.zw = TRANSFORM_TEX(v.texcoord, _WaterNormal);
+                
+                // local space -> world space
                 o.worldPos = mul(unity_ObjectToWorld, v.vertex);
 
+                // TBN matrix : U(tangent), V(binormal), W(normal)
                 fixed3 worldNormal = UnityObjectToWorldNormal(v.normal);
                 fixed3 worldTangent = UnityObjectToWorldDir(v.tangent.xyz);
                 fixed tangentSign = v.tangent.w * unity_WorldTransformParams.w;
@@ -119,17 +130,23 @@
                 o.TW2 = float4(worldTangent.z, worldBinormal.z, worldNormal.z, o.worldPos.z);
 
                 o.screenPos = ComputeScreenPos(o.vertex);
+                // ComputeScreenPos equal to the code below
+                // float4 screenPos = o.vertex;
+                // screenPos.xy /= screenPos.w; // perspective divide
+                // screenPos.xy = screenPos.xy * 0.5 + 0.5; // [-1,1] → [0,1] UV range
+                // screenPos.xy *= _ScreenParams.xy; // pixel pos
 
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
-
+            /* ------------------- fragment shader -------------------*/
             fixed4 frag (v2f i) : SV_Target
             {
+                // two sets of panners are used to scroll the normal map in different directions
                 half2 panner1 = ( _Time.y * _WaveParams.xy + i.uv_Tex.zw);
                 half2 panner2 = ( _Time.y * _WaveParams.zw + i.uv_Tex.zw);
                 half3 worldNormal = BlendNormals(UnpackNormal(tex2D( _WaterNormal, panner1)) , UnpackNormal(tex2D(_WaterNormal, panner2)));
-
+                // foam R G B 
                 half3 water = tex2D(_Foam,i.uv_Tex.xy/_Foam_ST.xy);
                 half3 foam1 = tex2D(_Foam,i.uv_Tex.xy + worldNormal.xy*_FoamOffset.w);
                 half3 foam2 = tex2D(_Foam, _Time.y * _FoamOffset.xy + i.uv_Tex.xy + worldNormal.xy*_FoamOffset.w);
