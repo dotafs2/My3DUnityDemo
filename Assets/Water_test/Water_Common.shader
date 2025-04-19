@@ -1,41 +1,42 @@
 ﻿Shader "Ciel/Water/Common_VF"
 {
-    Properties
-    {
-        _Foam("效果贴图:R深浅(黑浅白深)，G边缘泡沫，B细节扰动", 2D) = "white" {}
-        _DeepColor("深水区颜色", Color) = (0,0,0,0)
-        _ShalowColor("浅水区颜色", Color) = (1,1,1,0)
+Properties
+{
+    _Foam("Effect Map: R = Depth (black = shallow, white = deep), G = Foam Edge, B = Detail Distortion", 2D) = "white" {}
+    _DeepColor("Deep Water Color", Color) = (0,0,0,0)
+    _ShalowColor("Shallow Water Color", Color) = (1,1,1,0)
 
-        [Space(20)]
-        _WaterNormal("波纹法线贴图", 2D) = "bump" {}
-        _NormalScale("法线强度", Range(0,1)) = 0.3
-        _WaveParams ("水浪偏移速度：xy速度1，zw速度2", vector) = (-0.04,-0.02,-0.02,-0.04)
+    [Space(20)]
+    _WaterNormal("Normal Map for Waves", 2D) = "bump" {}
+    _NormalScale("Normal Strength", Range(0,1)) = 0.3
+    _WaveParams("Wave Offset Speed: xy = Speed1, zw = Speed2", vector) = (-0.04,-0.02,-0.02,-0.04)
 
-        [Space(20)]
-        _WaterSpecular("高光强度", Range(0,1)) = 0.8
-        _WaterSmoothness("高光衰减", Range(0,10)) = 8
-        _LightColor ("高光颜色", color) = (1,1,1,1)
-        _LightDir("光照方向", vector) = (0, 0, 0, 0)
-        _RimPower ("菲涅尔强度", Range(0,20)) = 8
+    [Space(20)]
+    _WaterSpecular("Specular Intensity", Range(0,1)) = 0.8
+    _WaterSmoothness("Specular Falloff", Range(0,10)) = 8
+    _LightColor("Specular Color", color) = (1,1,1,1)
+    _LightDir("Light Direction", vector) = (0, 0, 0, 0)
+    _RimPower("Fresnel Intensity", Range(0,20)) = 8
 
-        [Space(20)]
-        _FoamColor("泡沫颜色", Color) = (1,1,1,1)
-        _FoamDepth("泡沫范围", Range(-2,10)) = 0.5
-        _FoamFactor("泡沫衰减",Range(0,10)) = 0.2
-        _FoamOffset("XY:泡沫速度,Z:泡沫强度,W:泡沫扰动", vector) = (-0.01,0.01, 2, 0.01)
+    [Space(20)]
+    _FoamColor("Foam Color", Color) = (1,1,1,1)
+    _FoamDepth("Foam Range", Range(-2,10)) = 0.5
+    _FoamFactor("Foam Falloff", Range(0,10)) = 0.2
+    _FoamOffset("XY: Foam Speed, Z: Foam Intensity, W: Foam Distortion", vector) = (-0.01,0.01, 2, 0.01)
 
-        [Space(20)]
-        _DetailColor("细节颜色", Color) = (1,1,1,1)
-        _WaterWave("细节扰动强度",Range(0,0.1)) = 0.02
+    [Space(20)]
+    _DetailColor("Detail Color", Color) = (1,1,1,1)
+    _WaterWave("Detail Distortion Strength", Range(0,0.1)) = 0.02
 
-        [Space(20)]
-        _Frequency("波动频率", Range(0,100)) = 10
-        _Amplitude("波动幅度", Range(0,1)) = 0.1
-        _Time_scaled_value("Time Scaled Value", Range(0,10)) = 1
+    [Space(20)]
+    _Frequency("Wave Frequency", Range(0,100)) = 10
+    _Amplitude("Wave Amplitude", Range(0,1)) = 0.1
+    _Time_scaled_value("Time Scaled Value", Range(0,10)) = 1
 
-        [Space(40)]
-        _AlphaWidth("边缘透明宽度",Range(-1,1)) = 0
-    }
+    [Space(40)]
+    _AlphaWidth("Edge Transparency Width", Range(-1,1)) = 0
+}
+
 
     SubShader
     {
@@ -151,20 +152,22 @@
                 half3 foam1 = tex2D(_Foam,i.uv_Tex.xy + worldNormal.xy*_FoamOffset.w);
                 half3 foam2 = tex2D(_Foam, _Time.y * _FoamOffset.xy + i.uv_Tex.xy + worldNormal.xy*_FoamOffset.w);
                 half2 detailpanner = (i.uv_Tex.xy/_Foam_ST.xy + worldNormal.xy*_WaterWave);
-
+                // ---------- World‑space normal ----------
+                // _NormalScale = 0 → perfectly calm water, 1 → full normal‑map influence
                 worldNormal = lerp(half3(0, 0, 1), worldNormal, _NormalScale);
+                // Transform tangent‑space normal into world space
                 worldNormal = normalize(fixed3(dot(i.TW0.xyz, worldNormal), dot(i.TW1.xyz, worldNormal), dot(i.TW2.xyz, worldNormal)));
-
+                // ---------- View & lighting vectors ----------
                 fixed3 viewDir = normalize(UnityWorldSpaceViewDir(i.worldPos));
                 float NdotV = saturate(dot(worldNormal,viewDir));
                 fixed3 worldLightDir = _LightDir.xyz;
                 fixed3 halfDir = normalize(worldLightDir + viewDir);
-                     
+                // ---------- Diffuse / specular / rim lighting ----------
                 half4 diffuse = lerp(_ShalowColor, _DeepColor, water.r);
                 fixed3 specular = _LightColor.rgb * _WaterSpecular * pow(max(0, dot(worldNormal, halfDir)), _WaterSmoothness*256.0);
                 fixed3 rim = pow(1-saturate(NdotV),_RimPower)*_LightColor;
                 half4 detail = tex2D(_Foam,detailpanner).b * _DetailColor;
-                
+                // ---------- Depth‑based foam & alpha ----------
                 half4 screenPos = float4( i.screenPos.xyz , i.screenPos.w);
                 half eyeDepth = LinearEyeDepth(UNITY_SAMPLE_DEPTH(tex2Dproj(_CameraDepthTexture,UNITY_PROJ_COORD( screenPos ))));
                 half eyeDepthSubScreenPos = abs( eyeDepth - screenPos.w );

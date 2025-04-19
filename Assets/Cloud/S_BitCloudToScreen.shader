@@ -12,7 +12,7 @@ Shader "Cloud/BlitCloudToScreen"
 
             Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off
-            ZTest LEqual
+            ZTest Always
 
             HLSLPROGRAM
             #pragma vertex vert

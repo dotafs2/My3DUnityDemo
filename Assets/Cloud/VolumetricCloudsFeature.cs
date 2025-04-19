@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-// using static UnityEditor.MaterialProperty;
+using static UnityEditor.MaterialProperty;
 
 public class VolumetricCloudsRenderFeature : ScriptableRendererFeature
 {
@@ -22,6 +22,11 @@ public class VolumetricCloudsRenderFeature : ScriptableRendererFeature
 
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
+        if (renderingData.cameraData.camera.name != "MainCamera")
+        {
+            Debug.Log("dotafs");
+            return;
+        }
 
         if (pass == null)
             pass = new VolumetricCloudsRenderPass(setting);
